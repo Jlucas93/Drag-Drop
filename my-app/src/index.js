@@ -1,30 +1,33 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import {useDropzone} from 'react-dropzone';
 
-function App() {
+function Basic(props) {
+  const {acceptedFiles, getRootProps, getInputProps} = useDropzone();
+
+  const files = acceptedFiles.map((file) => (
+    <li key={file.path}>
+      {file.path} - {file.size} bytes
+    </li>
+  ));
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <p>React Drag and Drop</p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <section className="container">
+      <div {...getRootProps({className: 'dropzone'})}>
+        <input {...getInputProps()} />
+        <p>Arraste e solte aqui o aquivo</p>
+      </div>
+      <aside>
+        <h4>Files</h4>
+        <ul>{files}</ul>
+      </aside>
+    </section>
   );
 }
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <Basic />
   </React.StrictMode>,
   document.getElementById('root')
 );
