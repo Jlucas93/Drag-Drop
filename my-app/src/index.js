@@ -1,62 +1,34 @@
-import React, {useMemo} from 'react';
+import React, {useCallback} from 'react';
 import ReactDOM from 'react-dom';
 import {useDropzone} from 'react-dropzone';
+import './App.css';
 
-const baseStyle = {
-  flex: 1,
-  display: 'flex',
-  flexDirection: 'column',
-  alignItems: 'center',
-  padding: '20px',
-  borderWidth: 2,
-  borderRadius: 2,
-  borderColor: '#eeeeee',
-  borderStyle: 'dashed',
-  backgroundColor: '#fafafa',
-  color: '#bdbdbd',
-  outline: 'none',
-  transition: 'border .24s ease-in-out',
-};
+function App() {
+  const onDrop = useCallback((files) => {
+    let formData = new FormData();
+    formData.append('uploadedFile', files);
+    //let name = formData.get('uploadedFile');
 
-const focusedStyle = {
-  borderColor: '#2196f3',
-};
+    console.log(files);
+  }, []);
 
-const acceptStyle = {
-  borderColor: '#00e676',
-};
-
-const rejectStyle = {
-  borderColor: '#ff1744',
-};
-
-function StyledDropzone(props) {
-  const {getRootProps, getInputProps, isFocused, isDragAccept, isDragReject} =
-    useDropzone({accept: 'image/*'});
-
-  const style = useMemo(
-    () => ({
-      ...baseStyle,
-      ...(isFocused ? focusedStyle : {}),
-      ...(isDragAccept ? acceptStyle : {}),
-      ...(isDragReject ? rejectStyle : {}),
-    }),
-    [isFocused, isDragAccept, isDragReject]
-  );
+  const {getRootProps, getInputProps, isDragActive} = useDropzone({onDrop});
 
   return (
-    <div className="container">
-      <div {...getRootProps({style})}>
-        <input {...getInputProps()} />
-        <p>Drag 'n' drop some files here, or click to select files</p>
-      </div>
+    <div {...getRootProps()} className="dropzone">
+      <input {...getInputProps()} />
+      {isDragActive ? (
+        <p>Solte os arquivos aqui...</p>
+      ) : (
+        <p>Arraste e solte os arquivos aqui</p>
+      )}
     </div>
   );
 }
 
 ReactDOM.render(
   <React.StrictMode>
-    <StyledDropzone />
+    <App />
   </React.StrictMode>,
   document.getElementById('root')
 );
