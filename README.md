@@ -13,7 +13,7 @@ Ou
 **yarn add react-dropzone**
 
 **Tecnologias :**
-ReactJs / CSS / JavaSricp
+ReactJs / CSS / JavaSricpt
 
 **Autor**
  Nome | GitHub | Likedin | E-mail
