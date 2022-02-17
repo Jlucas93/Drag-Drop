@@ -6,11 +6,11 @@ Mais detalhe sobre a biblioteca podem ser encontrados aqui :https://github.com/r
 
 Para isntalar a biblioteca utilize :
 
-npm install --save react-dropzone
+**npm install --save react-dropzone**
 
 Ou
 
-yarn add react-dropzone
+**yarn add react-dropzone**
 
 **Tecnologias :**
 ReactJs / CSS / JavaSricpt
