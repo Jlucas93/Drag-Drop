@@ -2,18 +2,15 @@ import React, {useCallback} from 'react';
 import ReactDOM from 'react-dom';
 import {useDropzone} from 'react-dropzone';
 import './App.css';
+import api from './services/api';
 
 function App() {
   const onDrop = useCallback((files) => {
-
-    const formData = new FormData();
-    formData.append('uploadedFile', files);
-
-    
-    for( let i= 0; i<files.length; i++){
-      console.log(files[i].path)
-    }
-    
+    api.post('/', files[0], {
+      params: {
+        filename: files[0].name,
+      },
+    });
   }, []);
 
   const {getRootProps, getInputProps, isDragActive} = useDropzone({onDrop});
@@ -36,4 +33,3 @@ ReactDOM.render(
   </React.StrictMode>,
   document.getElementById('root')
 );
-
