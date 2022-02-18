@@ -5,11 +5,15 @@ import './App.css';
 
 function App() {
   const onDrop = useCallback((files) => {
-    let formData = new FormData();
-    formData.append('uploadedFile', files);
-    //let name = formData.get('uploadedFile');
 
-    console.log(files);
+    const formData = new FormData();
+    formData.append('uploadedFile', files);
+
+    
+    for( let i= 0; i<files.length; i++){
+      console.log(files[i].path)
+    }
+    
   }, []);
 
   const {getRootProps, getInputProps, isDragActive} = useDropzone({onDrop});
@@ -32,3 +36,4 @@ ReactDOM.render(
   </React.StrictMode>,
   document.getElementById('root')
 );
+
